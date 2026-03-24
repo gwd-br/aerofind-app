@@ -1,0 +1,52 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+
+- name: Build and Push to ECR
+  image: plugins/ecr
+  environment:
+    AWS_REGION:
+      from_secret: AWS_REGION
+    AWS_ACCESS_KEY:
+      from_secret: AWS_ACCESS_KEY
+    AWS_SECRET_KEY:
+      from_secret: AWS_SECRET_KEY
+    REGISTRY:
+      from_secret: REGISTRY
+  settings:
+    access_key: ${AWS_ACCESS_KEY}
+    secret_key: ${AWS_SECRET_KEY}
+    region: ${AWS_REGION}
+    registry: ${REGISTRY}
+    repo:
+      from_secret: REPO
+    tags:
+      - latest
+      - v${DRONE_BUILD_NUMBER}
+
+- name: Update cluster
+  image: alpine:latest
+  environment:
+    DEPLOY_URL:
+      from_secret: DEPLOY_URL
+    REPO:
+      from_secret: REPO
+    SERVICE_NAME:
+      from_secret: SERVICE_NAME
+  commands:
+  - "apk add -q --no-cache curl"
+  - "curl -X GET --insecure \"$DEPLOY_URL?SERVICE=$SERVICE_NAME&REPO=$REPO&VERSION=v$DRONE_BUILD_NUMBER\""
+
+- name: Notify
+  image: appleboy/drone-discord
+  environment:
+    DISCORD_WEBHOOK_ID:
+      from_secret: DISCORD_WEBHOOK_ID
+    DISCORD_WEBHOOK_TOKEN:
+      from_secret: DISCORD_WEBHOOK_TOKEN
+  settings:
+    webhook_id: ${DISCORD_WEBHOOK_ID}
+    webhook_token: ${DISCORD_WEBHOOK_TOKEN}
+    message: "[${DRONE_REPO_NAME}] Build: OK! Image: OK!"
