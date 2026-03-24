@@ -16,8 +16,7 @@
         </p>
         <p>
           Alguns dados, como imagem facial e documentos de identificação, podem ser
-          utilizados para validação de identidade e prevenção de fraudes na entrada
-          dos eventos.
+          utilizados para validação de identidade e prevenção de fraudes.
         </p>
         <p>
           Seus dados não são compartilhados com terceiros para fins de marketing,
