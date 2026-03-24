@@ -4,10 +4,9 @@ WORKDIR /app
 
 ENV NUXT_TELEMETRY_DISABLED=1
 
-COPY package.json package-lock.json face-sdk-postinstall.cjs ./
+COPY . .
 RUN npm ci
 
-COPY . .
 RUN npm run generate
 
 FROM nginx:alpine AS runner
