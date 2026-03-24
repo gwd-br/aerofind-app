@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV NUXT_TELEMETRY_DISABLED=1
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json face-sdk-postinstall.cjs ./
 RUN npm ci
 
 COPY . .
