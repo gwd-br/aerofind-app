@@ -44,7 +44,7 @@ function onSubmit() {
         <form class="p-6 md:p-8" @submit.prevent="onSubmit">
           <div class="flex flex-col gap-6">
             <div class="flex flex-col items-center text-center">
-              <h1 class="text-2xl font-bold">Face Tickets</h1>
+              <h1 class="text-2xl font-bold">AeroFind</h1>
               <p class="text-muted-foreground text-balance">
                 Acesse sua conta para continuar
               </p>
@@ -107,7 +107,7 @@ function onSubmit() {
               {{ loading ? "Entrando..." : "Entrar" }}
             </Button>
 
-            <!-- <div
+            <div
               class="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t"
             >
               <span class="bg-card text-muted-foreground relative z-10 px-2">
@@ -168,22 +168,11 @@ function onSubmit() {
             <div class="text-center text-sm">
               Não possui uma conta?
               <a href="#" class="underline underline-offset-4"> Cadastre-se </a>
-            </div> -->
+            </div>
           </div>
         </form>
 
-        <!-- coluna visual (opcional) -->
-        <div
-          class="relative hidden md:flex flex-col justify-center items-center min-h-[280px]"
-          style="background: linear-gradient(45deg, #202867, #1252ac)"
-        >
-          <img
-            src="/logo1630518171x2749.gif"
-            alt="Login"
-            class="object-contain max-h-full max-w-full"
-          />
-          <span class="text-[11px] text-white">by Connexus</span>
-        </div>
+
       </CardContent>
     </Card>
 
